@@ -1,47 +1,95 @@
+import { useState, useEffect } from "react"
 import * as S from "./styles"
-import { Button } from "components"
-
-import logo from "assets/svg/logo.svg"
+import { Button, Card } from "components"
 
 import { AiOutlineArrowRight } from "react-icons/ai"
 
 const Home: React.FC = () => {
 
-  function openLink (url: string):void  {
-    window.open(url, "_blank")
+  interface ITask {
+    id: number
+    name: string
+    description: string
   }
+
+  const [datas, setDatas] = useState<ITask[]>([])
+  const [task, setTask] = useState({name: '', description: ''})
+
+  function createItem(nameTask: string, descriptionTask: string) {
+    if(!nameTask || !descriptionTask) return
+
+    setTask({name: '', description: ''})
+    addTask(
+     {
+      id: Math.floor(Math.random() * 9999),
+      name: nameTask,
+      description: descriptionTask
+    })
+  }
+
+  function addTask(newTask: ITask){
+    setDatas([...datas, newTask])
+    localStorage.setItem('data', JSON.stringify([...datas, newTask]))
+  }
+
+  function delTask(id: number){
+    const arrString = localStorage.getItem('data')
+    const arrLocal: ITask[] = arrString ? JSON.parse(arrString) : []
+
+    const updateTasks = arrLocal.filter(task => task.id !== id)
+
+    localStorage.setItem('data', JSON.stringify(updateTasks))
+    setDatas(updateTasks)
+  }
+
+  useEffect(() => {
+    const tasksLocal = localStorage.getItem('data')
+    const tasks: ITask[] = tasksLocal ? JSON.parse(tasksLocal) : []
+    setDatas(tasks)
+  }, [])
 
   return (
     <S.Container>
-      <img src={logo} alt="React logo" />
-      <p>
-        Este é um template criado com o CRA.
-        Ele trás algumas configurações padrões e organização de 
-        folders prontas para serem seguidas.
-      </p>
-
-      <p>Comece a editar a página home em <code>src/pages/Home/index.tsx</code></p>
-
       <S.ContainerButtons>
-       <Button
-        endIcon={<AiOutlineArrowRight />}
-        color="primary"
-        size="lg"
-        onClick={() => openLink("https://create-react-app.dev/")}
-        >
-        CRA Documentation
-       </Button>
+      <label htmlFor="name">Nome da tarefa</label>
+      <S.Input
+      value={task.name}
+      type="text"
+      id="name"
+      onChange={e => setTask({...task, name: e.target.value})}/>
+
+      <label htmlFor="name">Descrição tarefa</label>
+      <S.Input
+      value={task.description}
+      type="text"
+      id="name"
+      onChange={e => setTask({...task, description: e.target.value})}/>
 
        <Button
         endIcon={<AiOutlineArrowRight />}
         color="primary"
         size="lg"
-        onClick={() => openLink("https://pt-br.reactjs.org/")}
+        onClick={() => createItem(task.name, task.description)}
         >
-        REACT Documentation
+       Add
        </Button>
+
 
      </S.ContainerButtons>
+      <S.Tasks
+        >
+       {datas?.map(({id, name, description}) => {
+         return (
+          <Card
+          key={id}
+          id={id}
+          nameTask={name}
+          descriptionTask={description}
+          onDel={() => delTask(id)}
+        />
+         )
+       })}
+      </S.Tasks>
     </S.Container>
   )
 }
