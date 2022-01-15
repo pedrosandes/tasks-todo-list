@@ -20,10 +20,25 @@ export const Content = styled.section`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  max-width: 500px;
+  width: 100%;
 
   p {
-    text-align: left;
-    max-width: 500px;
-    min-width: 500px;
+
+    max-height: 400px;
+    overflow-y: auto;
+
+    ::-webkit-scrollbar {
+    width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      color: ${({theme}) => theme.colors.black};
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: ${({theme}) => theme.colors.blue};
+      border-radius: 20px;
+    }
   }
 `

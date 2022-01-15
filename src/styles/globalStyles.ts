@@ -7,6 +7,19 @@ const GlobalStyle = createGlobalStyle`
 *  resets.
 */
 
+body::-webkit-scrollbar {
+  width: 5px;
+}
+
+body::-webkit-scrollbar-track {
+  color: ${({theme}) => theme.colors.black};
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: ${({theme}) => theme.colors.blue};
+  border-radius: 20px;
+}
+
 :root {
   font-size: 62.5%;
 }
@@ -15,6 +28,10 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body, #root {
+  min-height: 100vh;
 }
 
 html,body {

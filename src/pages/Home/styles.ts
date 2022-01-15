@@ -10,6 +10,7 @@ export const Container = styled.main`
   align-items: center;
   margin-top: 15px;
   padding: 15px;
+  height: 100%;
  `
 
 export const ContainerButtons = styled.section`
@@ -17,12 +18,8 @@ export const ContainerButtons = styled.section`
   gap: 14px;
   flex-direction: column;
   margin-bottom: 20px;
-  width: 480px;
-
-  @media screen and (max-width: 720px) {
-    width: 100%;
-    max-width: 500px;
-  }
+  max-width: 500px;
+  width: 100%;
 `
 
 export const Input = styled.input`
@@ -39,14 +36,6 @@ export const Tasks = styled.section`
  gap: 20px;
  max-width: 500px;
  width: 100%;
- padding: 0 10px;
-
-
- @media screen and (max-width: 720px) {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-  }
 `
 
 export const Task = styled.div`

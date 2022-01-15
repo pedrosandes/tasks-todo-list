@@ -30,6 +30,7 @@ const Modal: React.FC<ModalProps> = ({title, description, onToggle, isOpen}) => 
         </div>
       </S.Content>
     </S.Container>
+
   )
 }
 
