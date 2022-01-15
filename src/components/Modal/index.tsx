@@ -1,51 +1,35 @@
+import * as S from "./styles"
 import { Button } from "components"
+
 
 interface ModalProps {
   title?: string
   description?: string
   onToggle: () => void
+  isOpen: boolean
 }
 
-const Modal: React.FC<ModalProps> = ({title, description, onToggle}) => {
+const Modal: React.FC<ModalProps> = ({title, description, onToggle, isOpen}) => {
+
+  /***********
+   * Se o isOpen for false ele retorna null(não renderiza nada)
+   * Se o isOpen for true ele renderiza o componente com os dados passados
+   * por props.
+   */
+  if(!isOpen) return null
+
   return (
-   <div style={
-      {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        backgroundColor: '#000',
-        opacity: 0.8,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-        }}>
-      <div style={
-        {
-          backgroundColor: "#f5f5f5",
-          color: '#000',
-          padding: '30px',
-          borderRadius: '15px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '8px'
-        }
-      }>
+    <S.Container>
+      <S.Content>
         <h1>{title}</h1>
-        <p style={
-          {
-            textAlign: 'left',
-            maxWidth: '500px'
-          }
-        }>
+        <p>
           {description}
         </p>
         <div>
           <Button onClick={onToggle} color="primary">Fechar</Button>
         </div>
-      </div>
-    </div>
+      </S.Content>
+    </S.Container>
   )
 }
 

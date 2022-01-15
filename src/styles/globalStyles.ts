@@ -2,6 +2,11 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 
+/***********
+*  Estilo global da aplicação, onde ficam padrões de estilo do projeto e
+*  resets.
+*/
+
 :root {
   font-size: 62.5%;
 }

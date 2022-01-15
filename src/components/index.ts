@@ -1,5 +1,9 @@
+/***********
+*  Arquivo onde importo e exporto os componentes, para assim importar qualquer
+*  componente de "src/components".
+*/
+
 import Button from "./Button";
 import Modal from "./Modal";
-import Card from "./Card";
 
-export { Button, Modal, Card }
+export { Button, Modal }

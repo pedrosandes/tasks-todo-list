@@ -2,6 +2,7 @@ import * as S from "./styles"
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   disableShadow?: boolean
+  fontSize?: string
   variant?: 'outline' | 'text'
   size?: 'sm' | 'md' | 'lg'
   color?: 'default' | 'primary' | 'secondary' | 'danger'
@@ -9,10 +10,15 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   endIcon?: React.SVGAttributes<SVGElement>
 }
 
+/***********
+* Componente de button (um pouco complexo)
+*/
+
 const Button: React.FC<Props> = (
   {
-    children, 
+    children,
     color,
+    fontSize,
     variant,
     disableShadow,
     size,
@@ -23,13 +29,14 @@ const Button: React.FC<Props> = (
     ) => {
   return (
     <S.ButtonStyled
+    fontSize={fontSize}
     size={size}
     disableShadow={disableShadow}
-    color={color}  
+    color={color}
     variant={variant}
     {...props}
     >
-     
+
       {startIcon}
       {children}
       {endIcon}
