@@ -30,10 +30,6 @@ body::-webkit-scrollbar-thumb {
   box-sizing: border-box;
 }
 
-body, #root {
-  min-height: 100vh;
-}
-
 html,body {
   font-family: 'Montserrat';
   font-size: 1.6rem;
